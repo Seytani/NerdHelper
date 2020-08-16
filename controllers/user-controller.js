@@ -1,11 +1,11 @@
 let router = require('express').Router();
-let User = require('../db').import('../models/user');
+let { models } = require('../db');
 let jwt = require('jsonwebtoken');
 let bcrypt = require('bcryptjs');
 
 //create a user
 router.post('/add-user', (req, res) => {
-    User.create({
+    models.user.create({
         name: req.body.name,
         email: req.body.email,
         password: bcrypt.hashSync(req.body.password, 15)
@@ -27,7 +27,7 @@ router.post('/add-user', (req, res) => {
 
 //login
 router.post('/login', (req, res) => {
-    User.findOne({
+    models.user.findOne({
         where: {
             email: req.body.email
         }

@@ -1,4 +1,4 @@
-let User = require('../db').import('../models/user');
+let { models } = require('../db');
 let jwt = require('jsonwebtoken');
 
 const validateSession = (req, res, next) => {
@@ -8,7 +8,7 @@ const validateSession = (req, res, next) => {
     } else {
         jwt.verify(token, process.env.JWT_KEY, (err, decodedToken) => {
             if (!err && decodedToken) {
-                User.findOne({
+                models.user.findOne({
                     where: {
                         id: decodedToken.id
                     }

@@ -1,20 +1,26 @@
 let router = require('express').Router();
-let Question = require('../db').import('../models/question');
+let { models } = require('../db');
+
 
 //create a question
-router.post('/add', (req, res) => {
-    Question.create({
+router.post('/add', async (req, res) => { 
+    let question = await models.question.create({
         question: req.body.question,
         correctAnswer: req.body.correctAnswer,
-        incorrectAnswers: req.body.incorrectAnswers,
-        owner: req.user.id,
-    })
-        .then(
-            function questionCreated(question) {
-                res.status(200).json({ question });
-            })
-        .catch(err => res.status(500).json({ error: err }))
-})
+        incorrectAnswers: req.body.incorrectAnswers
+    });
+    let topic = await models.topic.findOne({
+        where: {id: req.body.topic_id}
+    });
+    topic.addQuestions(question)
+    .then(function questionCreated(question) {
+            res.status(200).json({
+                message: `Question added to ${topic.name}`,
+            });
+        }
+    )
+    .catch(err => res.status(500).json({ error: err }))
+});
 
 // //view all
 // router.get('/', (req, res) => {

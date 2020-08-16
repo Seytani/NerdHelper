@@ -1,7 +1,7 @@
-// const Topic = require('./topic');
+const { DataTypes } = require('sequelize');
 
-module.exports = (sequelize, DataTypes) => {
-    const Question = sequelize.define('question', {
+module.exports = (sequelize) => { 
+    sequelize.define('question', { 
         question: {
             type: DataTypes.STRING,
             allowNull: false
@@ -13,20 +13,8 @@ module.exports = (sequelize, DataTypes) => {
         incorrectAnswers: {
             type: DataTypes.ARRAY(DataTypes.TEXT),
             allowNull: false
-        },
-        owner: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        topic_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: sequelize.Topic,
-                key: 'id'
-            }
         }
     });
-
 }
 
 
