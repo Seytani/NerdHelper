@@ -8,7 +8,7 @@ const sequelize = new Sequelize('nerd-helper', 'postgres', 'password', {
     dialect: 'postgres'
 });
 
-Question(sequelize); // what is this doing
+Question(sequelize); // initializes models
 Topic(sequelize);
 User(sequelize);
 
