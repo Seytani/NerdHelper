@@ -28,7 +28,7 @@ router.get('/view-all',validateSesh, (req, res) => {
             if (topics.length > 0) {
                 res.status(200).json(topics);
             } else {
-                res.status(420).json({ message: 'No Topics.' });
+                res.status(420).json([]);
             }
         })
         .catch(err => res.status(500).json(err))
@@ -45,7 +45,7 @@ WHERE topics.id = 3; */
         if (topic) {
             res.status(200).json(topic);
         } else {
-            res.status(420).json({ message: 'Topic Type not in database.' });
+            res.status(420).json([]);
         }
     } catch (err) {
         res.status(500).json(err);

@@ -11,8 +11,12 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         incorrectAnswers: {
-            type: DataTypes.ARRAY(DataTypes.TEXT),
+            type: DataTypes.JSON,
             allowNull: false
+        },
+        review: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     });
 }

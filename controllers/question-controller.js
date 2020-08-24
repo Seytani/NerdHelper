@@ -22,55 +22,35 @@ router.post('/add', async (req, res) => {
     .catch(err => res.status(500).json({ error: err }))
 });
 
-// //view all
-// router.get('/', (req, res) => {
-//     Question.findAll({
-//         where: { owner: req.user.id }
-//     })
-//         .then(questions => res.status(200).json(questions)).catch(err => res.status(500).json(err))
-// })
+//update a question
+router.put('/edit/:id', (req, res) => {
+    const questionEdit = { newQuestion, newCorrectAnswer, newIncorrectAnswers, inReview  } = req.body
 
-// //update a question
-// router.put('/edit/:id', (req, res) => {
-//     const questionEdit = { title, description } = req.body
+    models.question.update(questionEdit, { where: { id: req.params.id } })
+        .then(updated => {
+            if (updated > 0) {
+                res.status(200).json({ message: 'question updated.' })
+            } else {
+                res.status(500).json({ message: 'question not found, no updates performed.' })
+            }
+        })
+        .catch(err => res.status(500).json(err))
+})
 
-//     Question.update(questionEdit, { where: { id: req.params.id } })
-//         .then(updated => {
-//             if (updated > 0) {
-//                 res.status(200).json({ message: 'question updated.' })
-//             } else {
-//                 res.status(500).json({ message: 'question not found, no updates performed.' })
-//             }
-//         })
-//         .catch(err => res.status(500).json(err))
-// })
+//update question in review
+router.put('/edit/:id', (req, res) => {
+    const questionEdit = { review } = req.body;
 
-// //update question completion
-// router.put('/edit/:id', (req, res) => {
-//     const questionEdit = { completed } = req.body
+    models.question.update(questionEdit, { where: { id: req.params.id } })
+            .then(updated => { res.status(200).json(updated) })
+            .catch(err => res.status(500).json(err))
+})
 
-//     Question.update(questionEdit, { where: { id: req.params.id } })
-//         .then(updated => {
-//             if (updated > 0) {
-//                 res.status(200).json({ message: 'question completion updated.' })
-//             } else {
-//                 res.status(500).json({ message: 'question not found, no updates performed.' })
-//             }
-//         })
-//         .catch(err => res.status(500).json(err))
-// })
-
-// //delete a question
-// router.delete('/delete/:id', (req, res) => {
-//     Question.destroy({ where: { id: req.params.id } })
-//         .then(deleted => {
-//             if (deleted > 0) {
-//                 res.status(200).json({ message: 'question deleted.' })
-//             } else {
-//                 res.status(500).json({ message: 'question does not exist.' })
-//             }
-//         })
-//         .catch(err => res.status(500).json(err))
-// })
+//delete a question
+router.delete('/delete/:id', (req, res) => {
+    models.question.destroy({ where: { id: req.params.id } })
+        .then(deleted => { res.status(200).json(deleted) })
+        .catch(err => res.status(500).json(err))
+})
 
 module.exports = router;
