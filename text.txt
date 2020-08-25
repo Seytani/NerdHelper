@@ -1,0 +1,8 @@
+heroku create nerdpal-server
+
+heroku addons:create heroku-postgresql:hobby-dev --app nerdpal-server
+
+
+git add . 
+git commit -m "initial heroku deployment"
+git push heroku master

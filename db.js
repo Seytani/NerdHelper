@@ -3,10 +3,9 @@ const Question = require('./models/question');
 const Topic = require('./models/topic');
 const User = require('./models/user');
 
-const sequelize = new Sequelize('nerd-helper', 'postgres', 'password', {
-    host: 'localhost',
-    dialect: 'postgres'
-});
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+})
 
 Question(sequelize); // initializes models
 Topic(sequelize);

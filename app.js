@@ -15,4 +15,4 @@ app.use('/user', user);
 app.use('/topics', topic);
 app.use('/question', question);
 
-app.listen(3001, () => console.log('****** NODEMON PORT 3001 *******'));
+app.listen(process.env.PORT, () => console.log('****** NODEMON PORT 3001 *******'));
