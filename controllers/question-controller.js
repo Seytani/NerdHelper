@@ -7,7 +7,9 @@ router.post('/add', async (req, res) => {
     let question = await models.question.create({
         question: req.body.question,
         correctAnswer: req.body.correctAnswer,
-        incorrectAnswers: req.body.incorrectAnswers
+        incorrectAnswer_1: req.body.incorrectAnswer_1,
+        incorrectAnswer_2: req.body.incorrectAnswer_2,
+        incorrectAnswer_3: req.body.incorrectAnswer_3
     });
     let topic = await models.topic.findOne({
         where: {id: req.body.topic_id}
@@ -24,7 +26,7 @@ router.post('/add', async (req, res) => {
 
 //update a question
 router.put('/edit/:id', (req, res) => {
-    const questionEdit = { newQuestion, newCorrectAnswer, newIncorrectAnswers, inReview  } = req.body
+    const questionEdit = { newQuestion, newCorrectAnswer, newIncorrectAnswer_1, newIncorrectAnswer_2, newIncorrectAnswer_3, inReview  } = req.body
 
     models.question.update(questionEdit, { where: { id: req.params.id } })
         .then(updated => {

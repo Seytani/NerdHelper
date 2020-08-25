@@ -10,8 +10,16 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        incorrectAnswers: {
-            type: DataTypes.JSON,
+        incorrectAnswer_1: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        incorrectAnswer_2: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        incorrectAnswer_3: {
+            type: DataTypes.STRING,
             allowNull: false
         },
         review: {
