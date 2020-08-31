@@ -42,7 +42,7 @@ router.put('/edit/:id', (req, res) => {
 //update question in review
 router.put('/edit/:id', (req, res) => {
     const questionEdit = { review } = req.body;
-
+    
     models.question.update(questionEdit, { where: { id: req.params.id } })
             .then(updated => { res.status(200).json(updated) })
             .catch(err => res.status(500).json(err))
