@@ -9,8 +9,8 @@ router.post('/', (req, res) => {
             score += 10;
         }
     }
-    score = (Math.floor(score / questions.length) * 100);
-    res.status(200).send(score)
+    score = (Math.floor(score / questions.length) * 10);
+    res.status(200).json({score})
         .catch(err => res.status(500).json({ error: err }))
 });
 
