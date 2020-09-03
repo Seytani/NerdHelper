@@ -5,6 +5,7 @@ let sequelize = require('./db');
 let user = require('./controllers/user-controller');
 let topic = require('./controllers/topic-controller');
 let question = require('./controllers/question-controller');
+let quiz = require('./controllers/quiz-controller');
 
 app.use(express.json());
 sequelize.sync();
@@ -14,5 +15,6 @@ app.use('/user', user);
 // app.use(require('./middleware/validate-session'));
 app.use('/topics', topic);
 app.use('/question', question);
+app.use('/quiz', quiz);
 
 app.listen(process.env.PORT, () => console.log('****** NODEMON PORT 3001 *******'));

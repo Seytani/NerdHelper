@@ -23,7 +23,7 @@ router.post('/add-topic', validateSesh, async (req, res) => {
 
 //view all by user
 router.get('/view-all',validateSesh, (req, res) => {
-    models.topic.findAll({ where: {userId: req.user.id} })
+    models.topic.findAll({ where: {userId: req.user.id}, order: [['id', 'ASC']]} )
         .then(topics => {
             if (topics.length > 0) {
                 res.status(200).json(topics);
@@ -38,7 +38,7 @@ router.get('/view-all',validateSesh, (req, res) => {
 //get all questions per topic
 router.get('/view-topic/:topicId', async (req, res) => {
     try {
-        const topic = await models.topic.findByPk(req.params.topicId, { include: models.question });
+        const topic = await models.topic.findByPk(req.params.topicId, { include: models.question, order:  [['id', 'ASC']]});
         /* SELECT questions.question FROM questions
 INNER JOIN topics ON questions."topicId" = topics.id
 WHERE topics.id = 3; */
