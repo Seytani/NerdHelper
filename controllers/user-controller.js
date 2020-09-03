@@ -48,7 +48,7 @@ router.post('/login', (req, res) => {
                 }
             })
         } else {
-            res.status(404).json({message: 'User not Found'});
+            res.status(504).json({message: 'User not Found'});
         }
     })
     .catch(err => res.status(500).json(err))
